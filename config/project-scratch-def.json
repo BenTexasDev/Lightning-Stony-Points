@@ -1,10 +1,13 @@
 {
   "orgName": "Demo Company",
+  "hasSampleData" : true,
+  "adminEmail" : "benbarela.tx@gmail.com",
   "edition": "Developer",
   "features": [],
   "settings": {
     "orgPreferenceSettings": {
       "s1DesktopEnabled": true
+      
     }
   }
 }
