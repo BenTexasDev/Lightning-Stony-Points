@@ -4,7 +4,7 @@
             <lightning-button label="View" title="View" onclick={handleChange} class="slds-m-left_x-small"></lightning-button>
             Edit Mode
             <div>
-                <c-opp-record-form mode='edit' record-id={recordId} oncancel={handleCancel} onsuccess={handleSave}></c-opp-record-form>
+                <c-opp-record mode='edit' record-id={recordId} oncancel={handleCancel} onsuccess={handleSave}></c-opp-record>
             </div>
         </template>
         <template if:false={editMode}>
@@ -12,7 +12,7 @@
             <lightning-button label="Edit" title="Edit" onclick={handleChange} class="slds-m-left_x-small"></lightning-button>     
             View Mode
             <div>
-                <c-opp-record-form mode='readonly' record-id={recordId}></c-opp-record-form>
+                <c-opp-record mode='readonly' record-id={recordId}></c-opp-record>
             </div>
         </template>
     </template> 
