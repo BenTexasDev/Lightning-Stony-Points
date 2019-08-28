@@ -11,6 +11,9 @@
             ],
             "c/helloWorldTile": [
                 "helloWorldTile/helloWorldTile.js"
+            ],
+            "c/oppRecord": [
+                "oppRecord/oppRecord.js"
             ]
         }
     },
