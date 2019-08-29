@@ -45,7 +45,7 @@ export default class OppCard extends NavigationMixin(LightningElement)
     }
     //We start to see buttons
     viewRecord() {
-        console.log(this.oppId);
+        //console.log(this.oppId);
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
