@@ -5,8 +5,8 @@ global with sharing class opportunityController {
 
         List <Opportunity> opportunities = new List <Opportunity>();
         //Create query and then add to your list.
-        for (Opportunity o: [SELECT Id,Account.Id,Name,StageName,Amount,CloseDate,isClosed,IsWon,Owner.Name
-                FROM Opportunity WHERE AccountId = :accountID]){
+        for (Opportunity o: [SELECT Id,Account.Id,Name,StageName,Amount,CloseDate,isClosed,isWon,Owner.Name
+                FROM Opportunity WHERE AccountId = :AccountId]){
                     opportunities.add(o);
                 }
         //return the list

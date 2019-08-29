@@ -9,7 +9,7 @@ export default class OppList extends LightningElement
     @track error;
 
     //Start wire
-    @wire(getOpportunities,{accoundId: '$recordId'})
+    @wire(getOpportunities,{accountId:'$recordId'})
     wiredOpportunities(value)
     {
         this.results = value;
