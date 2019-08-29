@@ -1,6 +1,8 @@
 import { LightningElement, wire,api,track } from 'lwc';
 import getOpportunities from '@salesforce/apex/opportunityController.getOpportunities';
-import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+//import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+import getPicklistValues from '@salesforce/apex/opportunityController.getPicklistValues';
+
 const COLS = [//Added columns here
     { label: 'Name', fieldName: 'Name', editable: true },
     { label: 'Stage', fieldName: 'StageName', editable: false },
@@ -32,6 +34,8 @@ export default class OppList extends LightningElement
     }
     @track tileMode = true;
     @track columns = COLS;//Added columns here
+    @track formattedAmount = 0;
+    @api totalRecords = 0;
 
     //Start wire
     @wire(getOpportunities,{accountId:'$recordId'})
@@ -75,5 +79,54 @@ export default class OppList extends LightningElement
                 break;
             default:
             }
+    }
+    handleChange(event) {
+        this.status = event.detail.value;
+        this.label = event.detail.label;
+        //console.log(this.status);
+        this.updateList();
+    }
+
+    updateList(){
+        var filter = [];
+        var k = 0;
+        var i;
+        var o;
+        this.formattedAmount = 0;
+        if (this.dataRetrieved){
+            for (i=0; i<this.allOpportunities.length;i++){
+                o = this.allOpportunities[i];
+                if(this.status !== 'All'){
+                    if(this.status === 'Open'){
+                        if (!o.IsClosed){
+                            filter[k] = o;
+                            this.formattedAmount += o.Amount;
+                            k++;
+                        }
+                    }else if (this.status === 'Closed') {
+                        if (o.IsClosed) {
+                        //this is Closed,so add it to the filter
+                        filter[k] = o;
+                        this.formattedAmount += o.Amount;
+                        k++;
+                        }
+                    }else if (this.status === o.StageName) {                    
+                     //this is the stage filter
+                        filter[k] = o;
+                        this.formattedAmount += o.Amount;
+                    k++; 
+                    }
+                    }else {
+                        //total the amount
+                        this.formattedAmount += o.Amount;
+                        //add the entire list to the filter
+                        filter = this.allOpportunities;  
+                }
+ 
+            }
+
+            this.displayedOpportunities = filter;
+            this.totalRecords = this.displayedOpportunities.length;//getting the number of elements.
+        }
     }
 }
