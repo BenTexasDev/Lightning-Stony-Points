@@ -17,6 +17,12 @@
             ],
             "c/oppRecord": [
                 "oppRecord/oppRecord.js"
+            ],
+            "c/oppList": [
+                "oppList/oppList.js"
+            ],
+            "c/oppCard": [
+                "oppCard/oppCard.js"
             ]
         }
     },

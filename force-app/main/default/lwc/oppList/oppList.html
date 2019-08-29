@@ -1,0 +1,18 @@
+<template>
+        <lightning-card
+            icon-name="standard:opportunity">
+            <h1 slot="title" >Opportunities</h1>
+            <template for:each={displayedOpportunities} for:item="opp">
+                <div key={opp.Id}>
+                    <c-opp-card
+                        name={opp.Name}
+                        stage={opp.StageName}
+                        amount={opp.Amount}
+                        close-date={opp.CloseDate}
+                        opp-id={opp.Id}>
+                    </c-opp-card>
+                </div>
+            </template>
+        </lightning-card>  
+    </template>
+    
