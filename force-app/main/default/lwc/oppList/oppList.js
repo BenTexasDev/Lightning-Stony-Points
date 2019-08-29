@@ -1,5 +1,6 @@
 import { LightningElement, wire,api,track } from 'lwc';
 import getOpportunities from '@salesforce/apex/opportunityController.getOpportunities';
+import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 const COLS = [//Added columns here
     { label: 'Name', fieldName: 'Name', editable: true },
     { label: 'Stage', fieldName: 'StageName', editable: false },
@@ -13,6 +14,7 @@ export default class OppList extends LightningElement
     @track allOpportunities;
     @api displayedOpportunities; //captures filter
     @track error;
+    @api status = 'All';
     @track dataRetrieved = false;
     @track iMode = 'Tile';
 
@@ -47,6 +49,18 @@ export default class OppList extends LightningElement
             this.dataRetrieved = false;
         }
 
+    }
+    //another wire for picklist values
+    @wire(getPicklistValues) 
+    wiredPicklistValues({ error, data }) {
+        if (data) {
+            this.picklistValues = data;
+            //console.log('picklist values: ' + JSON.stringify(picklistValues)); 
+        } else if (error) {
+            //console.log('error retrieving picklist values '); 
+            //console.log('error: ' + JSON.stringify(error));
+            this.error = error;
+        }
     }
     //This is where we add the options to our tile.
     handleViewChange(event)
