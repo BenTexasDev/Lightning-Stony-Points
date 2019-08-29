@@ -12,6 +12,7 @@ export default class OppCard extends NavigationMixin(LightningElement)
     @track formattedDate;
     @track formattedAmount;
     @api oppId;
+    @track openmodal = false;
    
     @api
     get closeDate(){
@@ -33,6 +34,14 @@ export default class OppCard extends NavigationMixin(LightningElement)
     }
     set amount(value) {
         this.formattedAmount = value;
+    }
+
+    openModal(){
+        this.openmodal = true
+    }
+
+    closeModal(){
+        this.openmodal = false
     }
     //We start to see buttons
     viewRecord() {

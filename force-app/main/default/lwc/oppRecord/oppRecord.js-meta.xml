@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="oppRecord">
-    <apiVersion>45.0</apiVersion>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="oppRecordForm">
+    <apiVersion>46.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Opportunity Record Form</masterLabel>
-    <description>Displays an Oportunity record in a form.</description>
-        <targets>
+    <description>Displays an Opportunity record in a form.</description>
+    <targets>
       <target>lightning__RecordPage</target>
     </targets>
     <targetConfigs>
