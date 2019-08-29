@@ -2,12 +2,16 @@ import { LightningElement, track,api } from 'lwc';
 import LANG from '@salesforce/i18n/lang';
 import LOCALE from '@salesforce/i18n/locale';
 import CURRENCY from '@salesforce/i18n/currency';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class OppCard extends LightningElement {
+
+export default class OppCard extends NavigationMixin(LightningElement)
+{
     @api name;
     @api stage;
     @track formattedDate;
     @track formattedAmount;
+    @api oppId;
    
     @api
     get closeDate(){
@@ -29,6 +33,17 @@ export default class OppCard extends LightningElement {
     }
     set amount(value) {
         this.formattedAmount = value;
+    }
+    //We start to see buttons
+    viewRecord() {
+        console.log(this.oppId);
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.oppId,
+                actionName: 'view',
+            },
+        });
     }
 
 }
