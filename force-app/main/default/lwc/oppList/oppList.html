@@ -1,4 +1,14 @@
-<template>
+<template><!--Picklist-->
+        <div class="slds-card__body slds-card__body_inner">
+                <lightning-combobox
+                name="progress"
+                label="Record Filter"
+                value={status}
+                placeholder="Select Progress"
+                options={picklistValues}
+                onchange={handleChange} >
+            </lightning-combobox>
+        </div>
         <template if:true={dataRetrieved}>
             <div slot="actions"><!--Button Menu-->
                 <lightning-button-menu alternative-text="Show menu" variant="border-filled" icon-name="utility:settings" onselect={handleViewChange}>
