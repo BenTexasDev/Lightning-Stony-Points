@@ -1,7 +1,15 @@
 import { LightningElement, wire,api,track } from 'lwc';
 import getOpportunities from '@salesforce/apex/opportunityController.getOpportunities';
-//import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import getPicklistValues from '@salesforce/apex/opportunityController.getPicklistValues';
+import NAME_FIELD from '@salesforce/schema/Opportunity.Name';
+import CLOSE_DATE_FIELD from '@salesforce/schema/Opportunity.CloseDate';
+import AMOUNT_FIELD from '@salesforce/schema/Opportunity.Amount';
+import STAGE_FIELD from '@salesforce/schema/Opportunity.StageName';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import {refreshApex } from '@salesforce/apex';
+import { updateRecord } from 'lightning/uiRecordApi';
+
+
 
 const COLS = [//Added columns here
     { label: 'Name', fieldName: 'Name', editable: true },
@@ -128,5 +136,44 @@ export default class OppList extends LightningElement
             this.displayedOpportunities = filter;
             this.totalRecords = this.displayedOpportunities.length;//getting the number of elements.
         }
+    }
+
+    handleSave(event){
+        const fields = {};
+
+        fields['Id'] = event.detail.draftValues[0].Id;
+        fields[NAME_FIELD.fieldApiName] = event.detail.draftValues[0].Name;
+        fields[AMOUNT_FIELD.fieldApiName] = event.detail.draftValues[0].Amount;
+        fields[CLOSE_DATE_FIELD.fieldApiName] = event.detail.draftValues[0].CloseDate;
+        fields[STAGE_FIELD.fieldApiName] = event.detail.draftValues[0].StageName;
+
+        const recordInputs = event.detail.draftValues.slice().map(draft => {
+            const fields = Object.assign({},draft);
+            return {fields};
+        });
+
+        console.log('calling promise');
+        const promises = recordInputs.map(recordInput => updateRecord(recordInput));
+        Promise.all(promises).then(opps => {
+            console.log('in promise');
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Success',
+                    message: 'Opportunities updated',
+                    variant: 'success'
+                })
+            );
+             // Clear all draft values
+             this.draftValues = [];
+    
+             // Display fresh data in the datatable
+             console.log('refresh');
+             refreshApex(this.results);
+             this.updateList();
+             console.log('refreshed');
+        }).catch(error => {
+            // Handle error
+        });
+
     }
 }

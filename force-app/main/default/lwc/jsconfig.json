@@ -15,14 +15,14 @@
             "c/helloWorldTile": [
                 "helloWorldTile/helloWorldTile.js"
             ],
-            "c/oppRecord": [
-                "oppRecord/oppRecord.js"
+            "c/oppCard": [
+                "oppCard/oppCard.js"
             ],
             "c/oppList": [
                 "oppList/oppList.js"
             ],
-            "c/oppCard": [
-                "oppCard/oppCard.js"
+            "c/oppRecord": [
+                "oppRecord/oppRecord.js"
             ]
         }
     },

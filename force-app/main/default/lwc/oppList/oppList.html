@@ -38,7 +38,9 @@
                     <lightning-datatable
                     key-field="Id"
                     data={displayedOpportunities}
-                    columns={columns}>
+                    columns={columns}
+                    draft-values={draftValues}
+                    onsave={handleSave}>
                 </lightning-datatable>
     </template>
 </template>
