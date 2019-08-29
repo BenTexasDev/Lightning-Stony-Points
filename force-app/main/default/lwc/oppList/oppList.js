@@ -1,5 +1,11 @@
 import { LightningElement, wire,api,track } from 'lwc';
 import getOpportunities from '@salesforce/apex/opportunityController.getOpportunities';
+const COLS = [//Added columns here
+    { label: 'Name', fieldName: 'Name', editable: true },
+    { label: 'Stage', fieldName: 'StageName', editable: false },
+    { label: 'Amount', fieldName: 'Amount', editable: true, type: 'currency' },
+    { label: 'Close Date', fieldName: 'CloseDate', editable: true, type: 'date' }
+];
 
 export default class OppList extends LightningElement 
 {
@@ -23,6 +29,7 @@ export default class OppList extends LightningElement
         }
     }
     @track tileMode = true;
+    @track columns = COLS;//Added columns here
 
     //Start wire
     @wire(getOpportunities,{accountId:'$recordId'})
@@ -41,18 +48,18 @@ export default class OppList extends LightningElement
         }
 
     }
-
+    //This is where we add the options to our tile.
     handleViewChange(event)
-        {
-            const selectedItemValue = event.detail.value;
-            switch(selectedItemValue){
-                case 'tile':
-                    this.mode = 'Tile';
-                    break;
-                case 'table':
-                    this.mode = 'Table';
-                    break;
-                default:
+    {
+        const selectedItemValue = event.detail.value;
+        switch(selectedItemValue){
+            case 'tile':
+                this.mode = 'Tile';
+                break;
+            case 'table':
+                this.mode = 'Table';
+                break;
+            default:
             }
-        }
+    }
 }
