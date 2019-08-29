@@ -6,6 +6,9 @@
             "c/app": [
                 "app/app.js"
             ],
+            "c/formToggle": [
+                "formToggle/formToggle.js"
+            ],
             "c/helloWorld": [
                 "helloWorld/helloWorld.js"
             ],
@@ -14,9 +17,6 @@
             ],
             "c/oppRecord": [
                 "oppRecord/oppRecord.js"
-            ],
-            "c/formToggle": [
-                "formToggle/formToggle.js"
             ]
         }
     },
