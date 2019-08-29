@@ -8,7 +8,7 @@ export default class OppCard extends LightningElement {
     @api stage;
     @track formattedDate;
     @track formattedAmount;
-
+   
     @api
     get closeDate(){
         const dateTimeFormat = new Intl.DateTimeFormat(LANG);
