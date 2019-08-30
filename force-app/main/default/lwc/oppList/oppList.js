@@ -159,10 +159,10 @@ export default class OppList extends LightningElement {
             return { fields };
         });
 
-        console.log('calling promise');
+        //console.log('calling promise');
         const promises = recordInputs.map(recordInput => updateRecord(recordInput));
         Promise.all(promises).then(opps => {
-            console.log('in promise');
+            //console.log('in promise');
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Success',
@@ -174,12 +174,29 @@ export default class OppList extends LightningElement {
              this.draftValues = [];
     
              // Display fresh data in the datatable
-             console.log('refresh');
+             //console.log('refresh');
              refreshApex(this.results);
              this.updateList();
-             console.log('refreshed');
+             //console.log('refreshed');
         }).catch(error => {
             // Handle error
         });
     }
+
+    handleSuccess(event){
+        //console.log('handleSuccess oppList');
+        this.doRefresh();
+    }
+
+    handleCancel(event){
+        this.doRefresh();
+    }
+    handleDelete(event) {
+        this.doRefresh();
+    }
+
+    doRefresh() {
+        refreshApex(this.results);
+
+}
 }

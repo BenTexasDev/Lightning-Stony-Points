@@ -13,4 +13,5 @@ export default class OppRecord extends LightningElement {
     handleSuccess(event){
         this.dispatchEvent(new CustomEvent('success'));
     }
+    
 }
