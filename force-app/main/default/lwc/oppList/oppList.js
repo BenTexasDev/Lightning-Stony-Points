@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable dot-notation */
+/* eslint-disable no-unused-vars */
 import { LightningElement, api, track, wire } from 'lwc';
 import getOpportunities from '@salesforce/apex/opportunityController.getOpportunities';
 import getPicklistValues from '@salesforce/apex/opportunityController.getPicklistValues';
@@ -191,9 +194,7 @@ export default class OppList extends LightningElement {
     handleCancel(event){
         this.doRefresh();
     }
-    handleDelete(event) {
-        this.doRefresh();
-    }
+    
 
     doRefresh() {
         refreshApex(this.results);
